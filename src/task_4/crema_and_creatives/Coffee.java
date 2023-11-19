@@ -13,11 +13,8 @@ abstract class Coffee {
         return name;
     }
 
-    // a shared method for setting coffee intensity
-    public final void prepareBase() {
-        System.out.println("Coffee intensity: " + coffeeIntensity);
+    public Intensity getCoffeeIntensity() {
+        return coffeeIntensity;
     }
 
-    // method for specific coffee preparation
-    public abstract void makeCoffee();
 }
