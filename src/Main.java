@@ -2,23 +2,53 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            // reads the input.json file
+            // reading input
             String filePath = "src/input.json";
             String fileContent = FileReaderUtil.readFile(filePath);
 
-            // parsing the content as a JSON object
+            // parsing as json object
             JSONObject jsonObject = new JSONObject(fileContent);
 
-            JSONArray individualsArray = jsonObject.getJSONArray("data");
+            if (jsonObject.has("data")) {
+                JSONArray individualsArray = jsonObject.getJSONArray("data");
 
-            // prints each JSON object separately
-            for (int i = 0; i < individualsArray.length(); i++) {
-                JSONObject individual = individualsArray.getJSONObject(i);
-                System.out.println("Individual JSON Object " + (i + 1) + ": " + individual);
+                // list to store the mapped ind objects
+                List<Individual> individualList = new ArrayList<>();
+
+                for (int i = 0; i < individualsArray.length(); i++) {
+                    JSONObject individualJson = individualsArray.getJSONObject(i);
+
+                    int id = individualJson.getInt("id");
+                    Boolean isHumanoid = individualJson.has("isHumanoid") ? individualJson.getBoolean("isHumanoid") : null;
+                    String planet = individualJson.optString("planet", null);
+                    Integer age = individualJson.has("age") ? individualJson.getInt("age") : null;
+
+                    // convert to a string array
+                    JSONArray traitsArray = individualJson.optJSONArray("traits");
+                    String[] traits = null;
+                    if (traitsArray != null) {
+                        traits = new String[traitsArray.length()];
+                        for (int j = 0; j < traitsArray.length(); j++) {
+                            traits[j] = traitsArray.getString(j);
+                        }
+                    }
+
+                    // ind object creation
+                    Individual individual = new Individual(id, isHumanoid, planet, age, traits);
+
+                    individualList.add(individual);
+
+                    System.out.println(individual);
+                }
+
+            } else {
+                System.err.println("Error: 'data' key not found in JSON.");
             }
 
         } catch (IOException e) {
