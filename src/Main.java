@@ -16,11 +16,14 @@ public class Main {
             if (jsonObject.has("data")) {
                 JSONArray individualsArray = jsonObject.getJSONArray("data");
 
-                // creates an IndividualContainer to store individuals
+                // create IndividualContainer to store individuals
                 IndividualContainer individualContainer = new IndividualContainer();
 
-                // maps each JSON object to an Individual object and then adds to container
-                for (int i = 0; i < individualsArray.length(); i++) {
+                // classifier
+                Classifier classifier = new Classifier();
+
+                // map each JSON object to an Individual object and then add to container
+                for (int i = 0; i < 2; i++) {  // testing with 2 entries for now
                     JSONObject individualJson = individualsArray.getJSONObject(i);
 
                     int id = individualJson.getInt("id");
@@ -38,21 +41,14 @@ public class Main {
                         }
                     }
 
-                    // ind object creation
+                    // individual object creation
                     Individual individual = new Individual(id, isHumanoid, planet, age, traits);
-
-                    // adding the individual to the container
                     individualContainer.addIndividual(individual);
+
+                    // classify the individual
+                    String classification = classifier.classify(individual);
+                    System.out.println("Individual ID: " + id + " classified as: " + classification);
                 }
-
-                System.out.println("\nOdd & Even");
-                individualContainer.printIds(); // print only the ids
-                System.out.println();
-
-                individualContainer.printEvenIds(); // print individuals with even ids
-                System.out.println();
-
-                individualContainer.printOddIds(); // print individuals with odd ids
 
             } else {
                 System.err.println("Error: 'data' key not found in JSON.");
