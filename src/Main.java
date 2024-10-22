@@ -23,7 +23,7 @@ public class Main {
                 Classifier classifier = new Classifier();
 
                 // map each JSON object to an Individual object and then add to container
-                for (int i = 0; i < 2; i++) {  // testing with 2 entries for now
+                for (int i = 0; i < individualsArray.length(); i++) {  // iterate through all individuals
                     JSONObject individualJson = individualsArray.getJSONObject(i);
 
                     int id = individualJson.getInt("id");
