@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             // reading input
-            String filePath = "src/input.json";  // Adjust the path if necessary
+            String filePath = "src/input.json";
             String fileContent = FileReaderUtil.readFile(filePath);
 
             // parsing as json object
@@ -41,10 +41,18 @@ public class Main {
                     // ind object creation
                     Individual individual = new Individual(id, isHumanoid, planet, age, traits);
 
+                    // adding the individual to the container
                     individualContainer.addIndividual(individual);
                 }
 
-                individualContainer.printAll();
+                System.out.println("\nOdd & Even");
+                individualContainer.printIds(); // print only the ids
+                System.out.println();
+
+                individualContainer.printEvenIds(); // print individuals with even ids
+                System.out.println();
+
+                individualContainer.printOddIds(); // print individuals with odd ids
 
             } else {
                 System.err.println("Error: 'data' key not found in JSON.");
