@@ -1,0 +1,81 @@
+[
+    {
+        "isHumanoid": false,
+        "traits": [
+            "HAIRY",
+            "TALL"
+        ],
+        "planet": "Kashyyyk",
+        "id": 0,
+        "age": 253
+    },
+    {
+        "isHumanoid": false,
+        "traits": ["BULKY"],
+        "id": 2
+    },
+    {
+        "isHumanoid": false,
+        "traits": [
+            "HAIRY",
+            "TALL"
+        ],
+        "id": 3,
+        "age": 253
+    },
+    {
+        "isHumanoid": true,
+        "traits": ["BULKY"],
+        "id": 5
+    },
+    {
+        "traits": ["EXTRA_ARMS"],
+        "id": 6,
+        "age": 26
+    },
+    {
+        "traits": ["EXTRA_HEAD"],
+        "id": 8,
+        "age": 82
+    },
+    {
+        "planet": "Endor",
+        "id": 10
+    },
+    {
+        "isHumanoid": false,
+        "traits": ["GREEN"],
+        "id": 11,
+        "age": 128
+    },
+    {
+        "isHumanoid": false,
+        "traits": [
+            "HAIRY",
+            "SHORT"
+        ],
+        "planet": "Endor",
+        "id": 12,
+        "age": 34
+    },
+    {
+        "traits": [
+            "HAIRY",
+            "TALL"
+        ],
+        "planet": "Kashyyyk",
+        "id": 13,
+        "age": 352
+    },
+    {
+        "isHumanoid": true,
+        "id": 14,
+        "age": 7523
+    },
+    {
+        "isHumanoid": false,
+        "planet": "Endor",
+        "id": 20,
+        "age": 22
+    }
+]
