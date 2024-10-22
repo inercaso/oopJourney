@@ -1,11 +1,11 @@
 public class Individual {
     private int id;
-    private Boolean isHumanoid; // Can be null, so use Boolean instead of boolean
+    private Boolean isHumanoid;
     private String planet;
-    private Integer age; // Use Integer to allow null values
+    private Integer age;
     private String[] traits;
 
-    // the constructor
+    // constructor
     public Individual(int id, Boolean isHumanoid, String planet, Integer age, String[] traits) {
         this.id = id;
         this.isHumanoid = isHumanoid;
@@ -34,13 +34,15 @@ public class Individual {
         return traits;
     }
 
-    // method for printing details
+    // updated method
     @Override
     public String toString() {
-        return "Individual{id=" + id +
+        return "Individual{" +
+                "id=" + id +
                 ", isHumanoid=" + isHumanoid +
                 ", planet='" + planet + '\'' +
                 ", age=" + age +
-                ", traits=" + String.join(", ", traits) + "}";
+                ", traits=" + (traits != null ? String.join(", ", traits) : "null") +
+                '}';
     }
 }
