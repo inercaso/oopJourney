@@ -2,14 +2,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         try {
             // reading input
-            String filePath = "src/input.json";
+            String filePath = "src/input.json";  // Adjust the path if necessary
             String fileContent = FileReaderUtil.readFile(filePath);
 
             // parsing as json object
@@ -18,9 +16,10 @@ public class Main {
             if (jsonObject.has("data")) {
                 JSONArray individualsArray = jsonObject.getJSONArray("data");
 
-                // list to store the mapped ind objects
-                List<Individual> individualList = new ArrayList<>();
+                // creates an IndividualContainer to store individuals
+                IndividualContainer individualContainer = new IndividualContainer();
 
+                // maps each JSON object to an Individual object and then adds to container
                 for (int i = 0; i < individualsArray.length(); i++) {
                     JSONObject individualJson = individualsArray.getJSONObject(i);
 
@@ -42,10 +41,10 @@ public class Main {
                     // ind object creation
                     Individual individual = new Individual(id, isHumanoid, planet, age, traits);
 
-                    individualList.add(individual);
-
-                    System.out.println(individual);
+                    individualContainer.addIndividual(individual);
                 }
+
+                individualContainer.printAll();
 
             } else {
                 System.err.println("Error: 'data' key not found in JSON.");
