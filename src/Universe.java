@@ -20,47 +20,87 @@ public class Universe {
     // method to calculate score for an individual
     public int calculateScore(Individual individual) {
         int score = 0;
+        String planet = individual.getPlanet();
+        String[] traits = individual.getTraits();
+        Boolean isHumanoid = individual.getIsHumanoid();
+        Integer age = individual.getAge();
 
-        // check if the individual's planet matches this universe
-        if (primaryPlanet.equals(individual.getPlanet()) || (secondaryPlanet != null && secondaryPlanet.equals(individual.getPlanet()))) {
-            score += 10;
+        // base planet score
+        if (planet != null && (planet.equals(primaryPlanet) ||
+                (secondaryPlanet != null && planet.equals(secondaryPlanet)))) {
+            score += 50;
         }
 
-        // check the individual's traits
-        for (String[] traitsSet : traitsSets) {
-            if (hasTraits(individual, traitsSet)) {
-                score += 5;
+        // trait matching
+        if (traits != null) {
+            for (String[] traitsSet : traitsSets) {
+                if (hasAllTraits(individual, traitsSet)) {
+                    score += 30;
+                }
             }
         }
 
-        // check the individual's age
-        if (individual.getAge() != null) {
-            if (primaryPlanet.equals(individual.getPlanet()) && primaryAgeLimit != null && individual.getAge() <= primaryAgeLimit) {
-                score += 5;
+        // universe-specific scoring
+        if (name.equals("Star Wars")) {
+            // prioritize hairy or short creatures from kashyyyk or endor
+            if (traits != null && (hasAnyTrait(traits, "HAIRY") || hasAnyTrait(traits, "SHORT"))) {
+                score += 20;
             }
-            if (secondaryPlanet != null && secondaryPlanet.equals(individual.getPlanet()) && secondaryAgeLimit != null && individual.getAge() <= secondaryAgeLimit) {
-                score += 5;
+        } else if (name.equals("Marvel")) {
+            // prioritize tall, blonde humanoids
+            if (isHumanoid != null && isHumanoid &&
+                    traits != null && hasAllTraits(individual, new String[]{"BLONDE", "TALL"})) {
+                score += 40;
+            }
+        } else if (name.equals("Lord of the Rings")) {
+            // prioritize earth-based creatures with specific traits or very old humanoids
+            if ((traits != null &&
+                    (hasAnyTrait(traits, "POINTY_EARS") ||
+                            (hasAnyTrait(traits, "SHORT") && hasAnyTrait(traits, "BULKY")))) ||
+                    (isHumanoid != null && isHumanoid && traits != null && hasAnyTrait(traits, "BULKY"))) {
+                score += 35;
+            }
+            // additional score for very old humanoids
+            if (isHumanoid != null && isHumanoid && age != null && age > 7000) {
+                score += 40;
+            }
+        } else if (name.equals("Hitchhiker's Guide")) {
+            // prioritize extra features, green creatures, and non-humanoids with bulky trait
+            if (traits != null &&
+                    (hasAnyTrait(traits, "EXTRA_ARMS") ||
+                            hasAnyTrait(traits, "EXTRA_HEAD") ||
+                            hasAnyTrait(traits, "GREEN") ||
+                            (isHumanoid != null && !isHumanoid && hasAnyTrait(traits, "BULKY")))) {
+                score += 45;
             }
         }
 
         return score;
     }
 
-    // method to check if the individual has required traits
-    private boolean hasTraits(Individual individual, String[] traitsSet) {
+    // helper method to check if individual has any of the specified traits
+    private boolean hasAnyTrait(String[] individualTraits, String trait) {
+        for (String t : individualTraits) {
+            if (t.equals(trait)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // helper method to check if individual has all required traits
+    private boolean hasAllTraits(Individual individual, String[] requiredTraits) {
         if (individual.getTraits() == null) return false;
 
-        for (String trait : traitsSet) {
+        for (String required : requiredTraits) {
             boolean found = false;
-            for (String individualTrait : individual.getTraits()) {
-                if (individualTrait.equals(trait)) {
+            for (String trait : individual.getTraits()) {
+                if (trait.equals(required)) {
                     found = true;
                     break;
                 }
             }
-            if (!found) {
-                return false;
-            }
+            if (!found) return false;
         }
         return true;
     }
