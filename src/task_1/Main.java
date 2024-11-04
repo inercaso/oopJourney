@@ -1,3 +1,5 @@
+package task_1;
+
 import display.Display;
 
 public class Main {
