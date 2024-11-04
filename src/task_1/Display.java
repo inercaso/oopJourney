@@ -1,8 +1,6 @@
 package task_1;
 
-// display class to represent monitor attributes and provide comparison methods
 public class Display {
-
     private int width;
     private int height;
     private float ppi;
@@ -16,12 +14,11 @@ public class Display {
         this.model = model;
     }
 
-    // method to compare display size (based on width * height) and print verbose output
+    // method to compare display size (based on width * height)
     public void compareSize(Display other) {
         int thisSize = this.width * this.height;
         int otherSize = other.width * other.height;
 
-        // output for size comparison
         if (thisSize > otherSize) {
             System.out.println(this.model + " is larger than " + other.model + " based on size.");
         } else if (thisSize < otherSize) {
@@ -31,9 +28,8 @@ public class Display {
         }
     }
 
-    // method to compare display sharpness (ppi) and print verbose output
+    // method to compare display sharpness (ppi)
     public void compareSharpness(Display other) {
-        // output for sharpness comparison
         if (this.ppi > other.ppi) {
             System.out.println(this.model + " is sharper than " + other.model + " based on PPI.");
         } else if (this.ppi < other.ppi) {
@@ -43,11 +39,15 @@ public class Display {
         }
     }
 
-    // method to compare both size and sharpness and print a combined comparison
+    // method to compare both size and sharpness
     public void compareWithMonitor(Display other) {
         System.out.println("Comparing " + this.model + " with " + other.model + ":");
         this.compareSize(other);
         this.compareSharpness(other);
-        System.out.println();
+    }
+
+    // new getter method for the model field
+    public String getModel() {
+        return model;
     }
 }
