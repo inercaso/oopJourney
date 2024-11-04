@@ -1,4 +1,4 @@
-package display;
+package task_1;
 
 // display class to represent monitor attributes and provide comparison methods
 public class Display {

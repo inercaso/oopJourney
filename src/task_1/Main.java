@@ -1,7 +1,5 @@
 package task_1;
 
-import display.Display;
-
 public class Main {
     public static void main(String[] args) {
         // instantiate three display objects
