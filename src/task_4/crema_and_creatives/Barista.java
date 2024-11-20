@@ -15,8 +15,8 @@ public class Barista {
         System.out.println("***********************************************");
 
         while (true) {
-            displayMenu(); // Show the coffee menu
-            takeOrder();   // Take user input for coffee preferences
+            displayMenu();
+            takeOrder();
 
             System.out.print("Would you like to order another coffee? (yes/no): ");
             String more = scanner.nextLine();
@@ -25,7 +25,7 @@ public class Barista {
             }
         }
 
-        make(); // Prepare all orders
+        make(); // prepare all orders
         System.out.println("\n***********************************************");
         System.out.println("   Thank you for visiting Crema & Creatives!");
         System.out.println("  We hope your coffee is as creative as you! ☕");
@@ -53,14 +53,13 @@ public class Barista {
             default -> throw new IllegalArgumentException("Invalid choice! Please pick a coffee from the menu.");
         };
 
-        // Collect properties for the chosen coffee type
         collectCoffeeProperties(coffeeType);
     }
 
     private void collectCoffeeProperties(CoffeeType coffeeType) {
         System.out.println("\n--- Customizing Your Coffee ---");
 
-        Intensity intensity = getIntensity(); // User chooses intensity
+        Intensity intensity = getIntensity(); // chooses intensity
         switch (coffeeType) {
             case CAPPUCCINO -> {
                 System.out.print("How much milk would you like in your cappuccino? (in mls): ");
@@ -87,7 +86,7 @@ public class Barista {
                 System.out.print("How much milk would you like in your cappuccino? (in mls): ");
                 int milk = scanner.nextInt();
                 scanner.nextLine();
-                SyrupType syrup = getSyrupType(); // User chooses syrup type
+                SyrupType syrup = getSyrupType(); // chooses syrup type
                 orders.add(new SyrupCappuccino(intensity, milk, syrup));
             }
         }
