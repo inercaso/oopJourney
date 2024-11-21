@@ -9,21 +9,13 @@ abstract class Coffee {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Intensity getCoffeeIntensity() {
-        return coffeeIntensity;
-    }
-
     public void prepareCoffee() {
         System.out.println("--- Coffee Machine is working ... ---");
-        System.out.println("> Making: " + getName());
-        System.out.println("Coffee intensity: " + getCoffeeIntensity());
-        getCoffeeDetails(); // Call subclass-specific details
-        System.out.println("> Dispensing: " + getName());
-        System.out.println("[" + getName() + " is ready! Enjoy! ☕]");
+        System.out.println("> Making: " + name); // Access fields directly
+        System.out.println("Coffee intensity: " + coffeeIntensity); // Access fields directly
+        getCoffeeDetails();
+        System.out.println("> Dispensing: " + name); // Access fields directly
+        System.out.println("[" + name + " is ready! Enjoy! ☕]");
     }
 
     protected abstract void getCoffeeDetails();

@@ -10,7 +10,7 @@ class PumpkinSpiceLatte extends Cappuccino {
 
     @Override
     protected void getCoffeeDetails() {
-        super.getCoffeeDetails(); // Reuse milk details from Cappuccino
+        super.getCoffeeDetails();
         System.out.println("Pumpkin Spice: " + mgOfPumpkinSpice + " mgs");
     }
 
