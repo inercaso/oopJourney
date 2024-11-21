@@ -8,12 +8,12 @@ class Americano extends Coffee {
         this.mlOfWater = mlOfWater;
     }
 
+    @Override
+    protected void getCoffeeDetails() {
+        System.out.println("Water: " + mlOfWater + " mls");
+    }
+
     public void makeAmericano() {
-        System.out.println("--- Coffee Machine is working ... ---");
-        System.out.println("> Making: " + getName());
-        System.out.println("Coffee intensity: " + getCoffeeIntensity());
-        System.out.println("Adding " + mlOfWater + " mls of water");
-        System.out.println("> Dispensing: " + getName());
-        System.out.println("[" + getName() + " is ready! Enjoy! ☕]");
+        prepareCoffee();
     }
 }

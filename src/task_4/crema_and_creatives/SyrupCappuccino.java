@@ -1,22 +1,20 @@
 package task_4.crema_and_creatives;
 
-class SyrupCappuccino extends Coffee {
-    private final int mlOfMilk;
+class SyrupCappuccino extends Cappuccino {
     private final SyrupType syrup;
 
     public SyrupCappuccino(Intensity coffeeIntensity, int mlOfMilk, SyrupType syrup) {
-        super(coffeeIntensity, "Syrup Cappuccino");
-        this.mlOfMilk = mlOfMilk;
+        super(coffeeIntensity, mlOfMilk);
         this.syrup = syrup;
     }
 
+    @Override
+    protected void getCoffeeDetails() {
+        super.getCoffeeDetails();
+        System.out.println("Syrup: " + syrup);
+    }
+
     public void makeSyrupCappuccino() {
-        System.out.println("--- Coffee Machine is working ... ---");
-        System.out.println("> Making: " + getName());
-        System.out.println("Coffee intensity: " + getCoffeeIntensity());
-        System.out.println("Adding " + mlOfMilk + " mls of milk");
-        System.out.println("Adding syrup: " + syrup);
-        System.out.println("> Dispensing: " + getName());
-        System.out.println("[" + getName() + " is ready! Enjoy! ☕]");
+        prepareCoffee();
     }
 }
